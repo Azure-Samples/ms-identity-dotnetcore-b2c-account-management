@@ -23,18 +23,17 @@ namespace b2c_ms_graph
 
     public class AppSettings
     {
-        [JsonProperty(PropertyName = "tenantId")]
+        [JsonProperty(PropertyName = "TenantId")]
         public string TenantId { get; set; }
 
-        [JsonProperty(PropertyName = "appId")]
+        [JsonProperty(PropertyName = "AppId")]
         public string AppId { get; set; }
 
-        [JsonProperty(PropertyName = "appSecret")]
-        public string AppSecret { get; set; }
+        [JsonProperty(PropertyName = "ClientSecret")]
+        public string ClientSecret { get; set; }
 
-        [JsonProperty(PropertyName = "usersFileName")]
+        [JsonProperty(PropertyName = "UsersFileName")]
         public string UsersFileName { get; set; }
 
     }
 }
-

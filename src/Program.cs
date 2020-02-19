@@ -31,7 +31,7 @@ namespace b2c_ms_graph
             IConfidentialClientApplication confidentialClientApplication = ConfidentialClientApplicationBuilder
                 .Create(config.AppId)
                 .WithTenantId(config.TenantId)
-                .WithClientSecret(config.AppSecret)
+                .WithClientSecret(config.ClientSecret)
                 .Build();
             ClientCredentialProvider authProvider = new ClientCredentialProvider(confidentialClientApplication);
 
