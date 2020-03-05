@@ -35,6 +35,9 @@ namespace b2c_ms_graph
         [JsonProperty(PropertyName = "ClientSecret")]
         public string ClientSecret { get; set; }
 
+        [JsonProperty(PropertyName = "B2cExtensionAppClientId")]
+        public string B2cExtensionAppClientId { get; set; }
+
         [JsonProperty(PropertyName = "UsersFileName")]
         public string UsersFileName { get; set; }
 
