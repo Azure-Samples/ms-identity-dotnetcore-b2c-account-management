@@ -9,23 +9,9 @@ using Microsoft.Identity.Client;
 
 namespace b2c_ms_graph
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
-        {
-            try
-            {
-                RunAsync().GetAwaiter().GetResult();
-            }
-            catch (Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(ex.Message);
-                Console.ResetColor();
-            }
-        }
-
-        private static async Task RunAsync()
+        static async Task Main(string[] args)
         {
             // Read application settings from appsettings.json (tenant ID, app ID, client secret, etc.)
             AppSettings config = AppSettingsFile.ReadFromJsonFile();
@@ -41,7 +27,7 @@ namespace b2c_ms_graph
             // Set up the Microsoft Graph service client with client credentials
             GraphServiceClient graphClient = new GraphServiceClient(authProvider);
 
-            Program.PrintCommands();
+            PrintCommands();
 
             try
             {
@@ -52,13 +38,13 @@ namespace b2c_ms_graph
                     switch (decision.ToLower())
                     {
                         case "1":
-                            await UserService.ListUsers(graphClient); ;
+                            await UserService.ListUsers(graphClient);
                             break;
                         case "2":
-                            await UserService.GetUserById(graphClient); ;
+                            await UserService.GetUserById(graphClient);
                             break;
                         case "3":
-                            await UserService.GetUserBySignInName(config, graphClient); ;
+                            await UserService.GetUserBySignInName(config, graphClient);
                             break;
                         case "4":
                             await UserService.DeleteUserById(graphClient);
@@ -87,26 +73,9 @@ namespace b2c_ms_graph
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-
-                var innerException = ex.InnerException;
-                if (innerException != null)
-                {
-                    while (innerException != null)
-                    {
-                        Console.WriteLine(innerException.Message);
-                        innerException = innerException.InnerException;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            finally
-            {
+                Console.WriteLine($"An error occurred: {ex}");
                 Console.ResetColor();
-            }
-
+            }           
             Console.ReadLine();
         }
 
