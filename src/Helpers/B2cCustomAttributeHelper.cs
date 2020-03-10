@@ -13,7 +13,7 @@
         {
             if (string.IsNullOrWhiteSpace(attributeName))
             {
-                throw new System.ArgumentException("Is mandatory", nameof(attributeName));
+                throw new System.ArgumentException("Parameter cannot be null", nameof(attributeName));
             }
 
             return $"extension_{_b2cExtensionAppClientId}_{attributeName}";
