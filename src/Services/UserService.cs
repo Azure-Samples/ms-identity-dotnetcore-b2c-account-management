@@ -267,9 +267,9 @@ namespace b2c_ms_graph
                 .Request()
                 .AddAsync(new User
                 {
-                    GivenName = "Kobe",
-                    Surname = "Bryant",
-                    DisplayName = "Kobe Bryant",
+                    GivenName = "Casey",
+                    Surname = "Jensen",
+                    DisplayName = "Casey Jensen",
                     Identities = new List<ObjectIdentity>
                     {
                         new ObjectIdentity()
