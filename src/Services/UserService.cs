@@ -41,20 +41,20 @@ namespace b2c_ms_graph
             }
 
             // Declare the names of the custom attributes
-            const string favouriteSport = "FavouriteSport";
-            const string isAwesome = "IsAwesome";
+            const string customAttributeName1 = "FavouriteSeason";
+            const string customAttributeName2 = "LovesPets";
 
             // Get the complete name of the custom attribute (Azure AD extension)
             Helpers.B2cCustomAttributeHelper helper = new Helpers.B2cCustomAttributeHelper(b2cExtensionAppClientId);
-            string favouriteSportAttributeName = helper.GetCompleteAttributeName(favouriteSport);
-            string isAwesomeAttributeName = helper.GetCompleteAttributeName(isAwesome);
+            string favouriteSeasonAttributeName = helper.GetCompleteAttributeName(customAttributeName1);
+            string lovesPetsAttributeName = helper.GetCompleteAttributeName(customAttributeName2);
 
-            Console.WriteLine($"Getting list of users with the custom attributes '{favouriteSport}' (string) and '{isAwesome}' (boolean)");
+            Console.WriteLine($"Getting list of users with the custom attributes '{customAttributeName1}' (string) and '{customAttributeName2}' (boolean)");
 
             // Get all users (one page)
             var result = await graphClient.Users
                 .Request()
-                .Select($"id,displayName,identities,{favouriteSportAttributeName},{isAwesomeAttributeName}")
+                .Select($"id,displayName,identities,{favouriteSeasonAttributeName},{lovesPetsAttributeName}")
                 .GetAsync();
 
             foreach (var user in result.CurrentPage)
@@ -245,20 +245,20 @@ namespace b2c_ms_graph
             }
 
             // Declare the names of the custom attributes
-            const string favouriteSport = "FavouriteSport";
-            const string isAwesome = "IsAwesome";
+            const string customAttributeName1 = "FavouriteSeason";
+            const string customAttributeName2 = "LovesPets";
 
             // Get the complete name of the custom attribute (Azure AD extension)
             Helpers.B2cCustomAttributeHelper helper = new Helpers.B2cCustomAttributeHelper(b2cExtensionAppClientId);
-            string favouriteSportAttributeName = helper.GetCompleteAttributeName(favouriteSport);
-            string isAwesomeAttributeName = helper.GetCompleteAttributeName(isAwesome);
+            string favouriteSeasonAttributeName = helper.GetCompleteAttributeName(customAttributeName1);
+            string lovesPetsAttributeName = helper.GetCompleteAttributeName(customAttributeName2);
 
-            Console.WriteLine($"Create a user with the custom attributes '{favouriteSport}' (string) and '{isAwesome}' (boolean)");
+            Console.WriteLine($"Create a user with the custom attributes '{customAttributeName1}' (string) and '{customAttributeName2}' (boolean)");
 
             // Fill custom attributes
             IDictionary<string, object> extensionInstance = new Dictionary<string, object>();
-            extensionInstance.Add(favouriteSportAttributeName, "Basketball");
-            extensionInstance.Add(isAwesomeAttributeName, true);
+            extensionInstance.Add(favouriteSeasonAttributeName, "summer");
+            extensionInstance.Add(lovesPetsAttributeName, true);
 
             try
             {
@@ -294,15 +294,15 @@ namespace b2c_ms_graph
                 // Get created user by object ID
                 result = await graphClient.Users[userId]
                     .Request()
-                    .Select($"id,givenName,surName,displayName,identities,{favouriteSportAttributeName},{isAwesomeAttributeName}")
+                    .Select($"id,givenName,surName,displayName,identities,{favouriteSeasonAttributeName},{lovesPetsAttributeName}")
                     .GetAsync();
 
                 if (result != null)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine($"DisplayName: {result.DisplayName}");
-                    Console.WriteLine($"{favouriteSport}: {result.AdditionalData[favouriteSportAttributeName].ToString()}");
-                    Console.WriteLine($"{isAwesome}: {result.AdditionalData[isAwesomeAttributeName].ToString()}");
+                    Console.WriteLine($"{customAttributeName1}: {result.AdditionalData[favouriteSeasonAttributeName].ToString()}");
+                    Console.WriteLine($"{customAttributeName2}: {result.AdditionalData[lovesPetsAttributeName].ToString()}");
                     Console.WriteLine();
                     Console.ResetColor();
                     Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
@@ -313,7 +313,7 @@ namespace b2c_ms_graph
                 if (ex.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Have you created the custom attributes '{favouriteSport}' (string) and '{isAwesome}' (boolean) in your tenant?");
+                    Console.WriteLine($"Have you created the custom attributes '{customAttributeName1}' (string) and '{customAttributeName2}' (boolean) in your tenant?");
                     Console.WriteLine();
                     Console.WriteLine(ex.Message);
                     Console.ResetColor();
