@@ -40,11 +40,11 @@ The code in this sample backs the [Manage Azure AD B2C user accounts with Micros
 ## Setup
 
 1. Clone the repo or download and extract the [ZIP archive](https://github.com/Azure-Samples/ms-identity-dotnetcore-b2c-account-management/archive/master.zip)
-1. Modify `./src/appsettings.json` with values appropriate for your environment:
+2. Modify `./src/appsettings.json` with values appropriate for your environment:
     - Azure AD B2C **tenant ID**
     - Registered application's **Application (client) ID**
     - Registered application's **Client secret**
-1. Build the application with `dotnet build`:
+3. Build the application with `dotnet build`:
 
     ```console
     azureuser@machine:~/ms-identity-dotnetcore-b2c-account-management$ cd src
@@ -61,6 +61,10 @@ The code in this sample backs the [Manage Azure AD B2C user accounts with Micros
 
     Time Elapsed 00:00:02.62
     ```
+4. Add 2 custom attributes to your B2C instance in order to run all the sample operations with custom attributes involved.
+   Attributes to add:
+    - FavouriteSeason (string)
+    - LovesPets (boolean)
 
 ## Running the sample
 
@@ -79,6 +83,8 @@ Command  Description
 [4]      Delete user by object ID
 [5]      Update user password
 [6]      Create users (bulk import)
+[7]      Create user with custom attributes and show result
+[8]      Get all users (one page) with custom attributes
 [help]   Show available commands
 [exit]   Exit the program
 -------------------------
