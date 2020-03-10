@@ -50,6 +50,7 @@ namespace b2c_ms_graph
             string lovesPetsAttributeName = helper.GetCompleteAttributeName(customAttributeName2);
 
             Console.WriteLine($"Getting list of users with the custom attributes '{customAttributeName1}' (string) and '{customAttributeName2}' (boolean)");
+            Console.WriteLine();
 
             // Get all users (one page)
             var result = await graphClient.Users
@@ -276,7 +277,7 @@ namespace b2c_ms_graph
                         {
                             SignInType = "emailAddress",
                             Issuer = tenantId,
-                            IssuerAssignedId = "kobe.bryant@example.com"
+                            IssuerAssignedId = "casey.jensen@example.com"
                         }
                     },
                     PasswordProfile = new PasswordProfile()
