@@ -16,23 +16,99 @@ namespace b2c_ms_graph
         {
             Console.WriteLine("Getting list of users...");
 
-            // Get all users (one page)
-            var result = await graphClient.Users
-                .Request()
-                .Select(e => new
-                {
-                    e.DisplayName,
-                    e.Id,
-                    e.Identities
-                })
-                .GetAsync();
-
-            foreach (var user in result.CurrentPage)
+            try
             {
-                Console.WriteLine(JsonConvert.SerializeObject(user));
+                // Get all users
+                var users = await graphClient.Users
+                    .Request()
+                    .Select(e => new
+                    {
+                        e.DisplayName,
+                        e.Id,
+                        e.Identities
+                    })
+                    .GetAsync();
+
+                // Iterate over all the users in the directory
+                var pageIterator = PageIterator<User>
+                    .CreatePageIterator(
+                        graphClient,
+                        users,
+                        // Callback executed for each user in the collection
+                        (user) =>
+                        {
+                            Console.WriteLine(JsonConvert.SerializeObject(user));
+                            return true;
+                        },
+                        // Used to configure subsequent page requests
+                        (req) =>
+                        {
+                            Console.WriteLine($"Reading next page of users...");
+                            return req;
+                        }
+                    );
+
+                await pageIterator.IterateAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(ex.Message);
+                Console.ResetColor();
             }
         }
 
+
+        public static async Task CountUsers(GraphServiceClient graphClient)
+        {
+            int i = 0;
+            Console.WriteLine("Getting list of users...");
+
+            try
+            {
+                // Get all users 
+                var users = await graphClient.Users
+                    .Request()
+                    .Select(e => new
+                    {
+                        e.DisplayName,
+                        e.Id,
+                        e.Identities
+                    })
+                    .GetAsync();
+
+                // Iterate over all the users in the directory
+                var pageIterator = PageIterator<User>
+                    .CreatePageIterator(
+                        graphClient,
+                        users,
+                        // Callback executed for each user in the collection
+                        (user) =>
+                        {
+                            i += 1;
+                            return true;
+                        },
+                        // Used to configure subsequent page requests
+                        (req) =>
+                        {
+                            Console.WriteLine($"Reading next page of users. Nubmer of useres: {i}");
+                            return req;
+                        }
+                    );
+
+                await pageIterator.IterateAsync();
+
+                Console.WriteLine("========================");
+                Console.WriteLine($"Nubmer of useres in the directory: {i}");
+                Console.WriteLine("========================");
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(ex.Message);
+                Console.ResetColor();
+            }
+        }
         public static async Task ListUsersWithCustomAttribute(GraphServiceClient graphClient, string b2cExtensionAppClientId)
         {
             if (string.IsNullOrWhiteSpace(b2cExtensionAppClientId))
@@ -309,7 +385,7 @@ namespace b2c_ms_graph
                     Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
                 }
             }
-            catch (ServiceException ex) 
+            catch (ServiceException ex)
             {
                 if (ex.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
@@ -318,7 +394,7 @@ namespace b2c_ms_graph
                     Console.WriteLine();
                     Console.WriteLine(ex.Message);
                     Console.ResetColor();
-                }                
+                }
             }
             catch (Exception ex)
             {

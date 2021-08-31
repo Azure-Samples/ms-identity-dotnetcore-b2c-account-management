@@ -61,6 +61,9 @@ namespace b2c_ms_graph
                         case "8":
                             await UserService.ListUsersWithCustomAttribute(graphClient, config.B2cExtensionAppClientId);
                             break;
+                        case "9":
+                            await UserService.CountUsers(graphClient);
+                            break;
                         case "help":
                             Program.PrintCommands();
                             break;
@@ -81,7 +84,7 @@ namespace b2c_ms_graph
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"An error occurred: {ex}");
                 Console.ResetColor();
-            }           
+            }
             Console.ReadLine();
         }
 
@@ -91,7 +94,7 @@ namespace b2c_ms_graph
             Console.WriteLine();
             Console.WriteLine("Command  Description");
             Console.WriteLine("====================");
-            Console.WriteLine("[1]      Get all users (one page)");
+            Console.WriteLine("[1]      Get all users");
             Console.WriteLine("[2]      Get user by object ID");
             Console.WriteLine("[3]      Get user by sign-in name");
             Console.WriteLine("[4]      Delete user by object ID");
@@ -99,6 +102,7 @@ namespace b2c_ms_graph
             Console.WriteLine("[6]      Create users (bulk import)");
             Console.WriteLine("[7]      Create user with custom attributes and show result");
             Console.WriteLine("[8]      Get all users (one page) with custom attributes");
+            Console.WriteLine("[9]      Get the number of useres in the directory");
             Console.WriteLine("[help]   Show available commands");
             Console.WriteLine("[exit]   Exit the program");
             Console.WriteLine("-------------------------");
