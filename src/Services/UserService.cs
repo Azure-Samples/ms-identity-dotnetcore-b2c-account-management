@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Graph;
-using Newtonsoft.Json;
 
 namespace b2c_ms_graph
 {
@@ -37,7 +37,7 @@ namespace b2c_ms_graph
                         // Callback executed for each user in the collection
                         (user) =>
                         {
-                            Console.WriteLine(JsonConvert.SerializeObject(user));
+                            Console.WriteLine(JsonSerializer.Serialize(user));
                             return true;
                         },
                         // Used to configure subsequent page requests
@@ -91,7 +91,7 @@ namespace b2c_ms_graph
                         // Used to configure subsequent page requests
                         (req) =>
                         {
-                            Console.WriteLine($"Reading next page of users. Nubmer of useres: {i}");
+                            Console.WriteLine($"Reading next page of users. Number of users: {i}");
                             return req;
                         }
                     );
@@ -99,7 +99,7 @@ namespace b2c_ms_graph
                 await pageIterator.IterateAsync();
 
                 Console.WriteLine("========================");
-                Console.WriteLine($"Nubmer of useres in the directory: {i}");
+                Console.WriteLine($"Number of users in the directory: {i}");
                 Console.WriteLine("========================");
             }
             catch (Exception ex)
@@ -136,10 +136,10 @@ namespace b2c_ms_graph
 
             foreach (var user in result.CurrentPage)
             {
-                Console.WriteLine(JsonConvert.SerializeObject(user));
+                Console.WriteLine(JsonSerializer.Serialize(user));
 
                 // Only output the custom attributes...
-                //Console.WriteLine(JsonConvert.SerializeObject(user.AdditionalData));
+                //Console.WriteLine(JsonSerializer.Serialize(user.AdditionalData));
             }
         }
 
@@ -165,7 +165,7 @@ namespace b2c_ms_graph
 
                 if (result != null)
                 {
-                    Console.WriteLine(JsonConvert.SerializeObject(result));
+                    Console.WriteLine(JsonSerializer.Serialize(result));
                 }
             }
             catch (Exception ex)
@@ -199,7 +199,7 @@ namespace b2c_ms_graph
 
                 if (result != null)
                 {
-                    Console.WriteLine(JsonConvert.SerializeObject(result));
+                    Console.WriteLine(JsonSerializer.Serialize(result));
                 }
             }
             catch (Exception ex)
@@ -382,7 +382,7 @@ namespace b2c_ms_graph
                     Console.WriteLine($"{customAttributeName2}: {result.AdditionalData[lovesPetsAttributeName].ToString()}");
                     Console.WriteLine();
                     Console.ResetColor();
-                    Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
+                    Console.WriteLine(JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true }));
                 }
             }
             catch (ServiceException ex)

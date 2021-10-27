@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace b2c_ms_graph
 {
@@ -26,19 +26,19 @@ namespace b2c_ms_graph
 
     public class AppSettings
     {
-        [JsonProperty(PropertyName = "TenantId")]
+        [JsonPropertyName("TenantId")]
         public string TenantId { get; set; }
 
-        [JsonProperty(PropertyName = "AppId")]
+        [JsonPropertyName("AppId")]
         public string AppId { get; set; }
 
-        [JsonProperty(PropertyName = "ClientSecret")]
+        [JsonPropertyName("ClientSecret")]
         public string ClientSecret { get; set; }
 
-        [JsonProperty(PropertyName = "B2cExtensionAppClientId")]
+        [JsonPropertyName("B2cExtensionAppClientId")]
         public string B2cExtensionAppClientId { get; set; }
 
-        [JsonProperty(PropertyName = "UsersFileName")]
+        [JsonPropertyName("UsersFileName")]
         public string UsersFileName { get; set; }
 
     }
