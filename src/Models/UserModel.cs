@@ -1,14 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.Graph;
-using Newtonsoft.Json;
 
 namespace b2c_ms_graph
 {
     public class UserModel : User
     {
-        [JsonProperty(PropertyName = "password", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("password")]
         public string Password { get; set; }
 
         public void SetB2CProfile(string TenantName)
@@ -34,7 +35,7 @@ namespace b2c_ms_graph
 
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this);
+            return JsonSerializer.Serialize(this);
         }
     }
 }

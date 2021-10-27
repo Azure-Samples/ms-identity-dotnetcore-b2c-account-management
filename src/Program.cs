@@ -4,8 +4,9 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Graph;
-using Microsoft.Graph.Auth;
+using Azure.Identity;
 using Microsoft.Identity.Client;
+using System.Net.Http.Headers;
 
 namespace b2c_ms_graph
 {
@@ -17,15 +18,9 @@ namespace b2c_ms_graph
             AppSettings config = AppSettingsFile.ReadFromJsonFile();
 
             // Initialize the client credential auth provider
-            IConfidentialClientApplication confidentialClientApplication = ConfidentialClientApplicationBuilder
-                .Create(config.AppId)
-                .WithTenantId(config.TenantId)
-                .WithClientSecret(config.ClientSecret)
-                .Build();
-            ClientCredentialProvider authProvider = new ClientCredentialProvider(confidentialClientApplication);
-
-            // Set up the Microsoft Graph service client with client credentials
-            GraphServiceClient graphClient = new GraphServiceClient(authProvider);
+            var scopes = new[] { "https://graph.microsoft.com/.default" };
+            var clientSecretCredential = new ClientSecretCredential(config.TenantId, config.AppId, config.ClientSecret);
+            var graphClient = new GraphServiceClient(clientSecretCredential, scopes);
 
             PrintCommands();
 
