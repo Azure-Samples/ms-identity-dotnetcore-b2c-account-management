@@ -13,8 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
     <PackageReference Include="Microsoft.Graph" Version="3.27.0" />
     <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.0" />
-    <PackageReference Include="Microsoft.Graph.Core" Version="1.24.0" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.28.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.37.0" />
   </ItemGroup>
 
   <ItemGroup>
