@@ -14,6 +14,7 @@ namespace b2c_ms_graph
     {
         static async Task Main(string[] args)
         {
+            //<ms_docref_set_auth_provider>
             // Read application settings from appsettings.json (tenant ID, app ID, client secret, etc.)
             AppSettings config = AppSettingsFile.ReadFromJsonFile();
 
@@ -21,7 +22,7 @@ namespace b2c_ms_graph
             var scopes = new[] { "https://graph.microsoft.com/.default" };
             var clientSecretCredential = new ClientSecretCredential(config.TenantId, config.AppId, config.ClientSecret);
             var graphClient = new GraphServiceClient(clientSecretCredential, scopes);
-
+            //</ms_docref_set_auth_provider>
             PrintCommands();
 
             try
