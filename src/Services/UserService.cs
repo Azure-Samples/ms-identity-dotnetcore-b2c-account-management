@@ -12,6 +12,8 @@ namespace b2c_ms_graph
 {
     class UserService
     {
+        
+        //<ms_docref_get_list_of_user_accounts>
         public static async Task ListUsers(GraphServiceClient graphClient)
         {
             Console.WriteLine("Getting list of users...");
@@ -57,7 +59,7 @@ namespace b2c_ms_graph
                 Console.ResetColor();
             }
         }
-
+        //</ms_docref_get_list_of_user_accounts>
 
         public static async Task CountUsers(GraphServiceClient graphClient)
         {
