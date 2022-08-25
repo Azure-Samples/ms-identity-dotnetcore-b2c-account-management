@@ -12,7 +12,6 @@ namespace b2c_ms_graph
 {
     class UserService
     {
-        
         //<ms_docref_get_list_of_user_accounts>
         public static async Task ListUsers(GraphServiceClient graphClient)
         {
@@ -332,7 +331,8 @@ namespace b2c_ms_graph
             string favouriteSeasonAttributeName = helper.GetCompleteAttributeName(customAttributeName1);
             string lovesPetsAttributeName = helper.GetCompleteAttributeName(customAttributeName2);
 
-            Console.WriteLine($"Create a user with the custom attributes '{customAttributeName1}' (string) and '{customAttributeName2}' (boolean)");
+            const string emailAddress = "casey.jensen@example.com";
+            Console.WriteLine($"Create a user `{emailAddress}` with the custom attributes '{customAttributeName1}' (string) and '{customAttributeName2}' (boolean)");
 
             // Fill custom attributes
             IDictionary<string, object> extensionInstance = new Dictionary<string, object>();
@@ -355,7 +355,7 @@ namespace b2c_ms_graph
                         {
                             SignInType = "emailAddress",
                             Issuer = tenantId,
-                            IssuerAssignedId = "casey.jensen@example.com"
+                            IssuerAssignedId = emailAddress
                         }
                     },
                     PasswordProfile = new PasswordProfile()
