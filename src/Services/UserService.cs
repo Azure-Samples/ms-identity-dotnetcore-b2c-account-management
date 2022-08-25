@@ -38,7 +38,7 @@ namespace b2c_ms_graph
                         // Callback executed for each user in the collection
                         (user) =>
                         {
-                            Console.WriteLine(JsonSerializer.Serialize(user));
+                            Console.WriteLine(JsonSerializer.Serialize(user, new JsonSerializerOptions() { WriteIndented = true }));
                             return true;
                         },
                         // Used to configure subsequent page requests
@@ -137,7 +137,7 @@ namespace b2c_ms_graph
 
             foreach (var user in result.CurrentPage)
             {
-                Console.WriteLine(JsonSerializer.Serialize(user));
+                Console.WriteLine(JsonSerializer.Serialize(user, new JsonSerializerOptions() { WriteIndented = true}));
 
                 // Only output the custom attributes...
                 //Console.WriteLine(JsonSerializer.Serialize(user.AdditionalData));
@@ -166,7 +166,7 @@ namespace b2c_ms_graph
 
                 if (result != null)
                 {
-                    Console.WriteLine(JsonSerializer.Serialize(result));
+                    Console.WriteLine(JsonSerializer.Serialize(result, new JsonSerializerOptions() { WriteIndented = true }));
                 }
             }
             catch (Exception ex)
@@ -200,7 +200,7 @@ namespace b2c_ms_graph
 
                 if (result != null)
                 {
-                    Console.WriteLine(JsonSerializer.Serialize(result));
+                    Console.WriteLine(JsonSerializer.Serialize(result, new JsonSerializerOptions() { WriteIndented = true }));
                 }
             }
             catch (Exception ex)
