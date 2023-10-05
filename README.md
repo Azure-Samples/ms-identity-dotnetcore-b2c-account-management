@@ -6,7 +6,6 @@ products:
 - azure-active-directory
 - azure-active-directory-b2c
 - dotnet
-- dotnet-core
 - ms-graph
 description: ".NET Core console application using Microsoft Graph for Azure AD B2C user account management."
 urlFragment: "manage-b2c-users-dotnet-core-ms-graph"
