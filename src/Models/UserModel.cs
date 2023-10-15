@@ -3,7 +3,7 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.Graph;
+using Microsoft.Graph.Models;
 
 namespace b2c_ms_graph
 {
@@ -18,11 +18,11 @@ namespace b2c_ms_graph
             {
                 ForceChangePasswordNextSignIn = false,
                 Password = this.Password,
-                ODataType = null
+                OdataType = null
             };
             this.PasswordPolicies =  "DisablePasswordExpiration,DisableStrongPassword";
             this.Password = null;
-            this.ODataType = null;
+            this.OdataType = null;
 
             foreach (var item in this.Identities)
             {
