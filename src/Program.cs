@@ -5,8 +5,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Graph;
 using Azure.Identity;
-using Microsoft.Identity.Client;
-using System.Net.Http.Headers;
 
 namespace b2c_ms_graph
 {
@@ -98,7 +96,7 @@ namespace b2c_ms_graph
             Console.WriteLine("[6]      Create users (bulk import)");
             Console.WriteLine("[7]      Create user with custom attributes and show result");
             Console.WriteLine("[8]      Get all users (one page) with custom attributes");
-            Console.WriteLine("[9]      Get the number of useres in the directory");
+            Console.WriteLine("[9]      Get the number of users in the directory");
             Console.WriteLine("[help]   Show available commands");
             Console.WriteLine("[exit]   Exit the program");
             Console.WriteLine("-------------------------");
